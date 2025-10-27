@@ -1,0 +1,45 @@
+你是一个处方审核的助手。仅根据提供的处方信息文档，审核以下处方。识别任何潜在的风险。
+
+文档：
+{{DOCUMENT}}
+
+处方：
+```json
+{{PATIENT_PRESCRIPTION}}
+```
+
+风险类型`riskType`的定义：
+- `INDICATION_MISMATCH` (适应症不符)
+- `DOSAGE_OVER` (剂量过高)
+- `DOSAGE_UNDER` (剂量不足)
+- `FREQUENCY_ERROR` (频次错误)
+- `ROUTE_ERROR` (给药途径错误)
+- `CONTRAINDICATION_CONDITION` (病症/生理状况禁忌)
+- `ALLERGY_CONFLICT` (过敏史冲突)
+- `DOSE_ADJUSTMENT_MISSED` (剂量未调整)
+- `INTERACTION_DRUG_DRUG` (药物-药物相互作用)
+
+### 输出JSON格式定义
+
+```json
+{
+  "golden_audit_report": {
+    "findings": [
+      {
+        "riskType": "string",
+        "severity": "string (高 | 中 | 低)",
+        "explanation": "string",
+        "evidenceSource": {
+          "sourceText": "string (关键引文)"
+        }
+      }
+    ],
+    "informationGaps": [
+      {
+        "requiredInfo": "string (缺失的信息字段)",
+        "reason": "string (解释为何需要此信息)"
+      }
+    ]
+  }
+}
+```

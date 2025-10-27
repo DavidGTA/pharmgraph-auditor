@@ -1,0 +1,26 @@
+[
+  {
+    "lang": "cypher",
+    "query": "MATCH (d:Drug {canonical_name: '阿贝西利片'})-[r:INDICATED_FOR]->(dis:Disease) RETURN dis.name AS approved_indication, r.source_text AS evidence"
+  },
+  {
+    "lang": "sql",
+    "query": "SELECT * FROM dosage_rules WHERE drug_canonical_name = '阿贝西利片';"
+  },
+  {
+    "lang": "sql",
+    "query": "SELECT * FROM contraindication_rules WHERE drug_canonical_name = '阿贝西利片' AND (age_min_years IS NOT NULL OR age_max_years IS NOT NULL);"
+  },
+  {
+    "lang": "sql",
+    "query": "SELECT * FROM contraindication_rules WHERE drug_canonical_name = '阿贝西利片' AND other_conditions IS NOT NULL;"
+  },
+  {
+    "lang": "cypher",
+    "query": "MATCH (d:Drug {canonical_name: '阿贝西利片'})-[r:CONTAINS]->(s:Substance) RETURN s.name AS substance_name, r.source_text AS evidence, r.role AS role"
+  },
+  {
+    "lang": "sql",
+    "query": "SELECT DISTINCT source_text FROM allergy_rules WHERE drug_canonical_name = '阿贝西利片'"
+  }
+]

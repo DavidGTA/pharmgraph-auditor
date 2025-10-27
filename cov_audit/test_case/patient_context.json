@@ -1,0 +1,29 @@
+{
+  "patient_profile": {
+    "demographics": {
+      "age": { "value": 62, "unit": "year" },
+      "gender": "女",
+      "weight": { "value": 65, "unit": "kg" },
+      "pregnancy_status": "非妊娠",
+      "lactation_status": "非哺乳期"
+    },
+    "clinical_status": {
+      "current_diagnoses": ["HR阳性、HER2阴性转移性乳腺癌"],
+      "medical_history": ["高血压"],
+      "allergies": ["无已知药物过敏史"],
+      "organ_function": {
+        "renal_impairment": "无",
+        "hepatic_impairment": "无"
+      }
+    }
+  },
+  "prescription_orders": [
+    {
+      "drug_name": "阿贝西利片",
+      "dose_per_admin": { "value": 200, "unit": "mg" },
+      "frequency": "每日两次",
+      "route": "口服",
+      "duration": { "value": 28, "unit": "天" }
+    }
+  ]
+}

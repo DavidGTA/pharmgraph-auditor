@@ -1,0 +1,778 @@
+[
+  {
+    "task_id": "task_index_0",
+    "task_data": {
+      "riskType": [
+        "INDICATION_MISMATCH"
+      ],
+      "description": "核实药物'阿贝西利片'是否适用于患者的诊断'HR阳性、HER2阴性转移性乳腺癌'。",
+      "params": {
+        "drug_name": "阿贝西利片",
+        "diagnoses": [
+          "HR阳性、HER2阴性转移性乳腺癌"
+        ]
+      }
+    },
+    "evidence": {
+      "MATCH (d:Drug {canonical_name: '阿贝西利片'})-[r:INDICATED_FOR]->(dis:Disease) RETURN dis.name AS approved_indication, r.source_text AS evidence": [
+        {
+          "approved_indication": "激素受体(HR)阳性、人表皮生长因子受体2 (HER2)阴性的局部晚期或转移性乳腺癌",
+          "evidence": "本品适用于激素受体(HR)阳性、人表皮生长因子受体2 (HER2)阴性的局部晚期或转移性乳腺癌: · 与氟维司群联合用于既往曾接受内分泌治疗后出现疾病进展的患者。"
+        }
+      ]
+    },
+    "curated_evidence": "根据知识库，药物 '阿贝西利片' 的官方批准适应症包括：\n- 激素受体(HR)阳性、人表皮生长因子受体2 (HER2)阴性的局部晚期或转移性乳腺癌 (来源: 本品适用于激素受体(HR)阳性、人表皮生长因子受体2 (HER2)阴性的局部晚期或转移性乳腺癌: · 与氟维司群联合用于既往曾接受内分泌治疗后出现疾病进展的患者。)"
+  },
+  {
+    "task_id": "task_index_1",
+    "task_data": {
+      "riskType": [
+        "DOSAGE_OVER",
+        "DOSAGE_UNDER",
+        "FREQUENCY_ERROR",
+        "ROUTE_ERROR"
+      ],
+      "description": "核实药物'阿贝西利片'的剂量(200 mg)、频次(每日两次)和途径(口服)是否符合针对诊断'HR阳性、HER2阴性转移性乳腺癌'的常规或指南推荐用法。",
+      "params": {
+        "drug_name": "阿贝西利片",
+        "dose_per_admin": {
+          "value": 200,
+          "unit": "mg"
+        },
+        "frequency": "每日两次",
+        "route": "口服",
+        "context": {
+          "diagnoses": [
+            "HR阳性、HER2阴性转移性乳腺癌"
+          ]
+        }
+      }
+    },
+    "evidence": {
+      "SELECT * FROM dosage_rules WHERE drug_canonical_name = '阿贝西利片';": [
+        {
+          "id": 21,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": null,
+          "hepatic_impairment": null,
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": null,
+          "per_dose_min_value": 150.0,
+          "per_dose_max_value": 150.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 300.0,
+          "daily_dose_max_value": 300.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 2.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "阿贝西利与内分泌治疗联合使用时的推荐剂量",
+          "source_text": "阿贝西利与内分泌治疗联合使用时的推荐剂量为150mg每日2次。",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 22,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": null,
+          "hepatic_impairment": "重度",
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": null,
+          "per_dose_min_value": 150.0,
+          "per_dose_max_value": 150.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 150.0,
+          "daily_dose_max_value": 150.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 1.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "重度肝功能损伤患者建议降低给药频率至每日1次",
+          "source_text": "在重度(Child Pugh C)肝功能损伤患者中,建议降低给药频率至每日1次",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 23,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": 18.0,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": null,
+          "hepatic_impairment": null,
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": null,
+          "per_dose_min_value": 150.0,
+          "per_dose_max_value": 150.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 300.0,
+          "daily_dose_max_value": 300.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 2.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "无须根据年龄调整剂量",
+          "source_text": "无须根据年龄调整剂量(参见【药代动力学】)",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 24,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": "轻度",
+          "hepatic_impairment": null,
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": null,
+          "per_dose_min_value": 150.0,
+          "per_dose_max_value": 150.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 300.0,
+          "daily_dose_max_value": 300.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 2.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "轻度肾功能损伤患者无须调整剂量",
+          "source_text": "肾功能损伤轻度或中度肾功能损伤患者使用阿贝西利无须调整剂量",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 25,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": "中度",
+          "hepatic_impairment": null,
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": null,
+          "per_dose_min_value": 150.0,
+          "per_dose_max_value": 150.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 300.0,
+          "daily_dose_max_value": 300.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 2.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "中度肾功能损伤患者无须调整剂量",
+          "source_text": "肾功能损伤轻度或中度肾功能损伤患者使用阿贝西利无须调整剂量",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 26,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": null,
+          "hepatic_impairment": "轻度",
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": null,
+          "per_dose_min_value": 150.0,
+          "per_dose_max_value": 150.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 300.0,
+          "daily_dose_max_value": 300.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 2.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "轻度肝功能损伤患者无须调整剂量",
+          "source_text": "肝功能损伤轻度(Child Pugh A)或中度(Child Pugh B)肝功能损伤患者使用阿贝西利无须调整剂量",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 27,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": null,
+          "hepatic_impairment": "中度",
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": null,
+          "per_dose_min_value": 150.0,
+          "per_dose_max_value": 150.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 300.0,
+          "daily_dose_max_value": 300.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 2.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "中度肝功能损伤患者无须调整剂量",
+          "source_text": "肝功能损伤轻度(Child Pugh A)或中度(Child Pugh B)肝功能损伤患者使用阿贝西利无须调整剂量",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 28,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": null,
+          "hepatic_impairment": null,
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": "[\"合并使用强效CYP3A4抑制剂\"]",
+          "per_dose_min_value": 100.0,
+          "per_dose_max_value": 100.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 200.0,
+          "daily_dose_max_value": 200.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 2.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "合并使用强效CYP3A4抑制剂时，剂量应降低至100mg每日2次",
+          "source_text": "阿贝西利的剂量应降低至 100mg 每日2次。如果不能避免使用强效 CYP3A4抑制剂",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 29,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": null,
+          "hepatic_impairment": null,
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": "[\"合并使用强效CYP3A4抑制剂\"]",
+          "per_dose_min_value": 50.0,
+          "per_dose_max_value": 50.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 100.0,
+          "daily_dose_max_value": 100.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 2.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "不能避免合并使用强效CYP3A4抑制剂时，剂量进一步降低至50mg每日2次",
+          "source_text": "阿贝西利的剂量应进一步降低至50mg每日2次。",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 30,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": null,
+          "hepatic_impairment": null,
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": "[\"合并使用强效CYP3A4抑制剂\"]",
+          "per_dose_min_value": 50.0,
+          "per_dose_max_value": 50.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 50.0,
+          "daily_dose_max_value": 50.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 1.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "不能避免合并使用强效CYP3A4抑制剂时，可以考虑继续给药，降低剂量至50mg每日1次",
+          "source_text": "阿贝西利剂量降低至50mg每日1次",
+          "created_at": "2025-10-12T14:11:32"
+        }
+      ]
+    },
+    "curated_evidence": "1. 推荐用法: 150.0000mg, 2次/日, 口服 (每日总剂量: 300.0000mg)。(阿贝西利与内分泌治疗联合使用时的推荐剂量)\n   来源: “阿贝西利与内分泌治疗联合使用时的推荐剂量为150mg每日2次。”\n2. 推荐用法: 150.0000mg, 2次/日, 口服 (每日总剂量: 300.0000mg)。(无须根据年龄调整剂量)\n   来源: “无须根据年龄调整剂量(参见【药代动力学】)”\n3. 推荐用法: 100.0000mg, 2次/日, 口服 (每日总剂量: 200.0000mg)。(合并使用强效CYP3A4抑制剂时，剂量应降低至100mg每日2次)\n   来源: “阿贝西利的剂量应降低至 100mg 每日2次。如果不能避免使用强效 CYP3A4抑制剂”"
+  },
+  {
+    "task_id": "task_index_2",
+    "task_data": {
+      "riskType": [
+        "CONTRAINDICATION_CONDITION"
+      ],
+      "description": "检查药物'阿贝西利片'是否与患者的生理状况(年龄, 性别, 妊娠/哺乳状态)和病理状况(既往病史, 肝肾功能)存在禁忌。",
+      "params": {
+        "drug_name": "阿贝西利片",
+        "patient_info": {
+          "age": {
+            "value": 62,
+            "unit": "year"
+          },
+          "gender": "女",
+          "pregnancy_status": "非妊娠",
+          "lactation_status": "非哺乳期",
+          "medical_history": [
+            "高血压"
+          ],
+          "organ_function": {
+            "renal_impairment": "无",
+            "hepatic_impairment": "无"
+          }
+        }
+      }
+    },
+    "evidence": {
+      "SELECT * FROM contraindication_rules WHERE drug_canonical_name = '阿贝西利片' AND (age_min_years IS NOT NULL OR age_max_years IS NOT NULL);": [],
+      "SELECT * FROM contraindication_rules WHERE drug_canonical_name = '阿贝西利片' AND other_conditions IS NOT NULL;": []
+    },
+    "curated_evidence": "根据患者提供的现有信息，未在知识库中查询到与药物 '阿贝西利片' 相关的特定禁忌症。"
+  },
+  {
+    "task_id": "task_index_3",
+    "task_data": {
+      "riskType": [
+        "ALLERGY_CONFLICT"
+      ],
+      "description": "检查药物'阿贝西利片'的成分或类别是否与患者的过敏史'无已知药物过敏史'冲突。",
+      "params": {
+        "drug_name": "阿贝西利片",
+        "allergies": [
+          "无已知药物过敏史"
+        ]
+      }
+    },
+    "evidence": {
+      "MATCH (d:Drug {canonical_name: '阿贝西利片'})-[r:CONTAINS]->(s:Substance) RETURN s.name AS substance_name, r.source_text AS evidence, r.role AS role": [
+        {
+          "substance_name": "黄色色素混合物",
+          "evidence": "辅料:微晶纤维素 101、微晶纤维素 102、交联羧甲基纤维素钠、乳糖、二氧化硅、硬脂富马酸钠、橙黄色色素混合物(50mg规格)、白色色素混合物(100mg规格)、黄色色素混合物(150mg规格)。",
+          "role": "辅料"
+        },
+        {
+          "substance_name": "白色色素混合物",
+          "evidence": "辅料:微晶纤维素 101、微晶纤维素 102、交联羧甲基纤维素钠、乳糖、二氧化硅、硬脂富马酸钠、橙黄色色素混合物(50mg规格)、白色色素混合物(100mg规格)、黄色色素混合物(150mg规格)。",
+          "role": "辅料"
+        },
+        {
+          "substance_name": "橙黄色色素混合物",
+          "evidence": "辅料:微晶纤维素 101、微晶纤维素 102、交联羧甲基纤维素钠、乳糖、二氧化硅、硬脂富马酸钠、橙黄色色素混合物(50mg规格)、白色色素混合物(100mg规格)、黄色色素混合物(150mg规格)。",
+          "role": "辅料"
+        },
+        {
+          "substance_name": "硬脂富马酸钠",
+          "evidence": "辅料:微晶纤维素 101、微晶纤维素 102、交联羧甲基纤维素钠、乳糖、二氧化硅、硬脂富马酸钠、橙黄色色素混合物(50mg规格)、白色色素混合物(100mg规格)、黄色色素混合物(150mg规格)。",
+          "role": "辅料"
+        },
+        {
+          "substance_name": "二氧化硅",
+          "evidence": "辅料:微晶纤维素 101、微晶纤维素 102、交联羧甲基纤维素钠、乳糖、二氧化硅、硬脂富马酸钠、橙黄色色素混合物(50mg规格)、白色色素混合物(100mg规格)、黄色色素混合物(150mg规格)。",
+          "role": "辅料"
+        },
+        {
+          "substance_name": "乳糖",
+          "evidence": "辅料:微晶纤维素 101、微晶纤维素 102、交联羧甲基纤维素钠、乳糖、二氧化硅、硬脂富马酸钠、橙黄色色素混合物(50mg规格)、白色色素混合物(100mg规格)、黄色色素混合物(150mg规格)。",
+          "role": "辅料"
+        },
+        {
+          "substance_name": "交联羧甲基纤维素钠",
+          "evidence": "辅料:微晶纤维素 101、微晶纤维素 102、交联羧甲基纤维素钠、乳糖、二氧化硅、硬脂富马酸钠、橙黄色色素混合物(50mg规格)、白色色素混合物(100mg规格)、黄色色素混合物(150mg规格)。",
+          "role": "辅料"
+        },
+        {
+          "substance_name": "微晶纤维素",
+          "evidence": "辅料:微晶纤维素 101、微晶纤维素 102、交联羧甲基纤维素钠、乳糖、二氧化硅、硬脂富马酸钠、橙黄色色素混合物(50mg规格)、白色色素混合物(100mg规格)、黄色色素混合物(150mg规格)。",
+          "role": "辅料"
+        },
+        {
+          "substance_name": "阿贝西利",
+          "evidence": "本品主要成份为阿贝西利。",
+          "role": "活性成份"
+        }
+      ],
+      "SELECT DISTINCT source_text FROM allergy_rules WHERE drug_canonical_name = '阿贝西利片'": [
+        {
+          "source_text": "对阿贝西利活性成分或任何辅料过敏者禁用。"
+        }
+      ]
+    },
+    "curated_evidence": "关于药物 '阿贝西利片' 的过敏风险信息如下：\n1. 活性成分: 阿贝西利。\n2. 辅料包括: 黄色色素混合物, 白色色素混合物, 橙黄色色素混合物, 硬脂富马酸钠, 二氧化硅, 乳糖, 交联羧甲基纤维素钠, 微晶纤维素。\n3. 相关过敏警告/规则:\n   - “对阿贝西利活性成分或任何辅料过敏者禁用。”"
+  },
+  {
+    "task_id": "task_index_4",
+    "task_data": {
+      "riskType": [
+        "DOSE_ADJUSTMENT_MISSED"
+      ],
+      "description": "根据患者的肝肾功能、年龄等特殊情况，评估药物'阿贝西利片'的当前处方剂量(200 mg, 每日两次)是否需要进行调整。",
+      "params": {
+        "drug_name": "阿贝西利片",
+        "current_prescription": {
+          "dose_per_admin": {
+            "value": 200,
+            "unit": "mg"
+          },
+          "frequency": "每日两次"
+        },
+        "patient_info": {
+          "age": {
+            "value": 62,
+            "unit": "year"
+          },
+          "weight": {
+            "value": 65,
+            "unit": "kg"
+          },
+          "organ_function": {
+            "renal_impairment": "无",
+            "hepatic_impairment": "无"
+          }
+        }
+      }
+    },
+    "evidence": {
+      "SELECT * FROM dosage_rules WHERE drug_canonical_name = '阿贝西利片';": [
+        {
+          "id": 21,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": null,
+          "hepatic_impairment": null,
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": null,
+          "per_dose_min_value": 150.0,
+          "per_dose_max_value": 150.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 300.0,
+          "daily_dose_max_value": 300.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 2.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "阿贝西利与内分泌治疗联合使用时的推荐剂量",
+          "source_text": "阿贝西利与内分泌治疗联合使用时的推荐剂量为150mg每日2次。",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 22,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": null,
+          "hepatic_impairment": "重度",
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": null,
+          "per_dose_min_value": 150.0,
+          "per_dose_max_value": 150.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 150.0,
+          "daily_dose_max_value": 150.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 1.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "重度肝功能损伤患者建议降低给药频率至每日1次",
+          "source_text": "在重度(Child Pugh C)肝功能损伤患者中,建议降低给药频率至每日1次",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 23,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": 18.0,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": null,
+          "hepatic_impairment": null,
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": null,
+          "per_dose_min_value": 150.0,
+          "per_dose_max_value": 150.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 300.0,
+          "daily_dose_max_value": 300.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 2.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "无须根据年龄调整剂量",
+          "source_text": "无须根据年龄调整剂量(参见【药代动力学】)",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 24,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": "轻度",
+          "hepatic_impairment": null,
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": null,
+          "per_dose_min_value": 150.0,
+          "per_dose_max_value": 150.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 300.0,
+          "daily_dose_max_value": 300.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 2.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "轻度肾功能损伤患者无须调整剂量",
+          "source_text": "肾功能损伤轻度或中度肾功能损伤患者使用阿贝西利无须调整剂量",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 25,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": "中度",
+          "hepatic_impairment": null,
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": null,
+          "per_dose_min_value": 150.0,
+          "per_dose_max_value": 150.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 300.0,
+          "daily_dose_max_value": 300.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 2.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "中度肾功能损伤患者无须调整剂量",
+          "source_text": "肾功能损伤轻度或中度肾功能损伤患者使用阿贝西利无须调整剂量",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 26,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": null,
+          "hepatic_impairment": "轻度",
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": null,
+          "per_dose_min_value": 150.0,
+          "per_dose_max_value": 150.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 300.0,
+          "daily_dose_max_value": 300.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 2.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "轻度肝功能损伤患者无须调整剂量",
+          "source_text": "肝功能损伤轻度(Child Pugh A)或中度(Child Pugh B)肝功能损伤患者使用阿贝西利无须调整剂量",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 27,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": null,
+          "hepatic_impairment": "中度",
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": null,
+          "per_dose_min_value": 150.0,
+          "per_dose_max_value": 150.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 300.0,
+          "daily_dose_max_value": 300.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 2.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "中度肝功能损伤患者无须调整剂量",
+          "source_text": "肝功能损伤轻度(Child Pugh A)或中度(Child Pugh B)肝功能损伤患者使用阿贝西利无须调整剂量",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 28,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": null,
+          "hepatic_impairment": null,
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": "[\"合并使用强效CYP3A4抑制剂\"]",
+          "per_dose_min_value": 100.0,
+          "per_dose_max_value": 100.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 200.0,
+          "daily_dose_max_value": 200.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 2.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "合并使用强效CYP3A4抑制剂时，剂量应降低至100mg每日2次",
+          "source_text": "阿贝西利的剂量应降低至 100mg 每日2次。如果不能避免使用强效 CYP3A4抑制剂",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 29,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": null,
+          "hepatic_impairment": null,
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": "[\"合并使用强效CYP3A4抑制剂\"]",
+          "per_dose_min_value": 50.0,
+          "per_dose_max_value": 50.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 100.0,
+          "daily_dose_max_value": 100.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 2.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "不能避免合并使用强效CYP3A4抑制剂时，剂量进一步降低至50mg每日2次",
+          "source_text": "阿贝西利的剂量应进一步降低至50mg每日2次。",
+          "created_at": "2025-10-12T14:11:32"
+        },
+        {
+          "id": 30,
+          "drug_canonical_name": "阿贝西利片",
+          "age_min_years": null,
+          "age_max_years": null,
+          "weight_min_kg": null,
+          "weight_max_kg": null,
+          "sex": null,
+          "renal_impairment": null,
+          "hepatic_impairment": null,
+          "pregnancy_status": null,
+          "lactation_status": null,
+          "other_conditions": "[\"合并使用强效CYP3A4抑制剂\"]",
+          "per_dose_min_value": 50.0,
+          "per_dose_max_value": 50.0,
+          "per_dose_unit": "mg",
+          "daily_dose_min_value": 50.0,
+          "daily_dose_max_value": 50.0,
+          "daily_dose_unit": "mg",
+          "frequency_value": 1.0,
+          "frequency_unit": "次/日",
+          "route": "口服",
+          "duration_min_value": null,
+          "duration_max_value": null,
+          "duration_unit": null,
+          "notes": "不能避免合并使用强效CYP3A4抑制剂时，可以考虑继续给药，降低剂量至50mg每日1次",
+          "source_text": "阿贝西利剂量降低至50mg每日1次",
+          "created_at": "2025-10-12T14:11:32"
+        }
+      ]
+    },
+    "curated_evidence": "1. 推荐用法: 100.0000mg, 2次/日, 口服 (每日总剂量: 200.0000mg)。(合并使用强效CYP3A4抑制剂时，剂量应降低至100mg每日2次)\n   来源: “阿贝西利的剂量应降低至 100mg 每日2次。如果不能避免使用强效 CYP3A4抑制剂”\n2. 推荐用法: 50.0000mg, 2次/日, 口服 (每日总剂量: 100.0000mg)。(不能避免合并使用强效CYP3A4抑制剂时，剂量进一步降低至50mg每日2次)\n   来源: “阿贝西利的剂量应进一步降低至50mg每日2次。”\n3. 推荐用法: 50.0000mg, 1次/日, 口服 (每日总剂量: 50.0000mg)。(不能避免合并使用强效CYP3A4抑制剂时，可以考虑继续给药，降低剂量至50mg每日1次)\n   来源: “阿贝西利剂量降低至50mg每日1次”"
+  }
+]

@@ -1,0 +1,837 @@
+[
+    {
+        "input_data": {
+            "case_id": "阿贝西利片_DOSAGE_OVER_01",
+            "patient_profile": {
+                "demographics": {
+                    "age": {
+                        "value": 62,
+                        "unit": "year"
+                    },
+                    "gender": "女",
+                    "weight": {
+                        "value": 65,
+                        "unit": "kg"
+                    },
+                    "pregnancy_status": "非妊娠",
+                    "lactation_status": "非哺乳期"
+                },
+                "clinical_status": {
+                    "current_diagnoses": [
+                        "HR阳性、HER2阴性转移性乳腺癌"
+                    ],
+                    "medical_history": [
+                        "高血压"
+                    ],
+                    "allergies": [
+                        "无已知药物过敏史"
+                    ],
+                    "organ_function": {
+                        "renal_impairment": "无",
+                        "hepatic_impairment": "无"
+                    }
+                }
+            },
+            "prescription_orders": [
+                {
+                    "drug_name": "阿贝西利片",
+                    "dose_per_admin": {
+                        "value": 200,
+                        "unit": "mg"
+                    },
+                    "frequency": "每日两次",
+                    "route": "口服",
+                    "duration": {
+                        "value": 28,
+                        "unit": "天"
+                    }
+                }
+            ]
+        },
+        "golden_audit_report": {
+            "findings": [
+                {
+                    "riskType": "DOSAGE_OVER",
+                    "severity": "高",
+                    "explanation": "患者处方的阿贝西利单次剂量为200mg，超过了说明书推荐的150mg，可能增加不良反应的风险。",
+                    "evidenceSource": {
+                        "document": "阿贝西利片说明书",
+                        "section": "用法用量",
+                        "sourceText": "阿贝西利与内分泌治疗联合使用时的推荐剂量为150mg每日2次。"
+                    }
+                }
+            ],
+            "informationGaps": []
+        }
+    },
+    {
+        "input_data": {
+            "case_id": "阿贝西利片_FREQUENCY_ERROR_01",
+            "patient_profile": {
+                "demographics": {
+                    "age": {
+                        "value": 58,
+                        "unit": "year"
+                    },
+                    "gender": "女",
+                    "weight": {
+                        "value": 60,
+                        "unit": "kg"
+                    },
+                    "pregnancy_status": "非妊娠",
+                    "lactation_status": "非哺乳期"
+                },
+                "clinical_status": {
+                    "current_diagnoses": [
+                        "HR阳性、HER2阴性局部晚期乳腺癌"
+                    ],
+                    "medical_history": [
+                        "2型糖尿病"
+                    ],
+                    "allergies": [],
+                    "organ_function": {
+                        "renal_impairment": "无",
+                        "hepatic_impairment": "无"
+                    }
+                }
+            },
+            "prescription_orders": [
+                {
+                    "drug_name": "阿贝西利片",
+                    "dose_per_admin": {
+                        "value": 150,
+                        "unit": "mg"
+                    },
+                    "frequency": "每日一次",
+                    "route": "口服",
+                    "duration": {
+                        "value": 28,
+                        "unit": "天"
+                    }
+                }
+            ]
+        },
+        "golden_audit_report": {
+            "findings": [
+                {
+                    "riskType": "FREQUENCY_ERROR",
+                    "severity": "中",
+                    "explanation": "患者肝功能正常，处方给药频次为“每日一次”，不符合说明书推荐的“每日两次”的标准频次，可能导致治疗效果不佳。每日一次仅推荐用于重度肝功能损伤患者。",
+                    "evidenceSource": {
+                        "document": "阿贝西利片说明书",
+                        "section": "用法用量",
+                        "sourceText": "阿贝西利与内分泌治疗联合使用时的推荐剂量为150mg每日2次。"
+                    }
+                }
+            ],
+            "informationGaps": []
+        }
+    },
+    {
+        "input_data": {
+            "case_id": "阿贝西利片_INDICATION_MISMATCH_01",
+            "patient_profile": {
+                "demographics": {
+                    "age": {
+                        "value": 67,
+                        "unit": "year"
+                    },
+                    "gender": "男",
+                    "weight": {
+                        "value": 70,
+                        "unit": "kg"
+                    },
+                    "pregnancy_status": "不适用",
+                    "lactation_status": "不适用"
+                },
+                "clinical_status": {
+                    "current_diagnoses": [
+                        "晚期前列腺癌"
+                    ],
+                    "medical_history": [
+                        "高血脂"
+                    ],
+                    "allergies": [
+                        "头孢类抗生素"
+                    ],
+                    "organ_function": {
+                        "renal_impairment": "轻度",
+                        "hepatic_impairment": "无"
+                    }
+                }
+            },
+            "prescription_orders": [
+                {
+                    "drug_name": "阿贝西利片",
+                    "dose_per_admin": {
+                        "value": 150,
+                        "unit": "mg"
+                    },
+                    "frequency": "每日两次",
+                    "route": "口服",
+                    "duration": {
+                        "value": 28,
+                        "unit": "天"
+                    }
+                }
+            ]
+        },
+        "golden_audit_report": {
+            "findings": [
+                {
+                    "riskType": "INDICATION_MISMATCH",
+                    "severity": "高",
+                    "explanation": "患者诊断为“晚期前列腺癌”，与阿贝西利片的批准适应症“激素受体(HR)阳性、人表皮生长因子受体2 (HER2)阴性的局部晚期或转移性乳腺癌”不符。",
+                    "evidenceSource": {
+                        "document": "阿贝西利片说明书",
+                        "section": "适应症",
+                        "sourceText": "本品适用于激素受体(HR)阳性、人表皮生长因子受体2 (HER2)阴性的局部晚期或转移性乳腺癌:"
+                    }
+                }
+            ],
+            "informationGaps": []
+        }
+    },
+    {
+        "input_data": {
+            "case_id": "阿贝西利片_CONTRAINDICATION_CONDITION_01",
+            "patient_profile": {
+                "demographics": {
+                    "age": {
+                        "value": 16,
+                        "unit": "year"
+                    },
+                    "gender": "女",
+                    "weight": {
+                        "value": 50,
+                        "unit": "kg"
+                    },
+                    "pregnancy_status": "非妊娠",
+                    "lactation_status": "非哺乳期"
+                },
+                "clinical_status": {
+                    "current_diagnoses": [
+                        "青少年HR+/HER2-乳腺癌"
+                    ],
+                    "medical_history": [],
+                    "allergies": [],
+                    "organ_function": {
+                        "renal_impairment": "无",
+                        "hepatic_impairment": "无"
+                    }
+                }
+            },
+            "prescription_orders": [
+                {
+                    "drug_name": "阿贝西利片",
+                    "dose_per_admin": {
+                        "value": 150,
+                        "unit": "mg"
+                    },
+                    "frequency": "每日两次",
+                    "route": "口服",
+                    "duration": {
+                        "value": 28,
+                        "unit": "天"
+                    }
+                }
+            ]
+        },
+        "golden_audit_report": {
+            "findings": [
+                {
+                    "riskType": "CONTRAINDICATION_CONDITION",
+                    "severity": "高",
+                    "explanation": "患者年龄为16岁，属于儿童和青少年人群，阿贝西利在该人群中的安全性和有效性尚未确定，不应使用。",
+                    "evidenceSource": {
+                        "document": "阿贝西利片说明书",
+                        "section": "儿童用药",
+                        "sourceText": "尚未确定儿童和18岁以下青少年中阿贝西利的安全性和有效性。尚未获得相关数据。"
+                    }
+                }
+            ],
+            "informationGaps": []
+        }
+    },
+    {
+        "input_data": {
+            "case_id": "阿贝西利片_CONTRAINDICATION_CONDITION_02",
+            "patient_profile": {
+                "demographics": {
+                    "age": {
+                        "value": 34,
+                        "unit": "year"
+                    },
+                    "gender": "女",
+                    "weight": {
+                        "value": 58,
+                        "unit": "kg"
+                    },
+                    "pregnancy_status": "妊娠",
+                    "lactation_status": "非哺乳期"
+                },
+                "clinical_status": {
+                    "current_diagnoses": [
+                        "HR阳性、HER2阴性转移性乳腺癌"
+                    ],
+                    "medical_history": [],
+                    "allergies": [],
+                    "organ_function": {
+                        "renal_impairment": "无",
+                        "hepatic_impairment": "无"
+                    }
+                }
+            },
+            "prescription_orders": [
+                {
+                    "drug_name": "阿贝西利片",
+                    "dose_per_admin": {
+                        "value": 150,
+                        "unit": "mg"
+                    },
+                    "frequency": "每日两次",
+                    "route": "口服",
+                    "duration": {
+                        "value": 28,
+                        "unit": "天"
+                    }
+                }
+            ]
+        },
+        "golden_audit_report": {
+            "findings": [
+                {
+                    "riskType": "CONTRAINDICATION_CONDITION",
+                    "severity": "高",
+                    "explanation": "患者处于妊娠期，而阿贝西利不建议在妊娠期间使用，因其可能具有生殖毒性。",
+                    "evidenceSource": {
+                        "document": "阿贝西利片说明书",
+                        "section": "孕妇及哺乳期妇女用药",
+                        "sourceText": "不建议在妊娠期间使用阿贝西利,也不建议未采取避孕措施的育龄女性使用阿贝西利。"
+                    }
+                }
+            ],
+            "informationGaps": []
+        }
+    },
+    {
+        "input_data": {
+            "case_id": "阿贝西利片_ALLERGY_CONFLICT_01",
+            "patient_profile": {
+                "demographics": {
+                    "age": {
+                        "value": 55,
+                        "unit": "year"
+                    },
+                    "gender": "女",
+                    "weight": {
+                        "value": 68,
+                        "unit": "kg"
+                    },
+                    "pregnancy_status": "非妊娠",
+                    "lactation_status": "非哺乳期"
+                },
+                "clinical_status": {
+                    "current_diagnoses": [
+                        "HR阳性、HER2阴性转移性乳腺癌"
+                    ],
+                    "medical_history": [
+                        "乳糖不耐受症"
+                    ],
+                    "allergies": [
+                        "乳糖"
+                    ],
+                    "organ_function": {
+                        "renal_impairment": "无",
+                        "hepatic_impairment": "无"
+                    }
+                }
+            },
+            "prescription_orders": [
+                {
+                    "drug_name": "阿贝西利片",
+                    "dose_per_admin": {
+                        "value": 150,
+                        "unit": "mg"
+                    },
+                    "frequency": "每日两次",
+                    "route": "口服",
+                    "duration": {
+                        "value": 28,
+                        "unit": "天"
+                    }
+                }
+            ]
+        },
+        "golden_audit_report": {
+            "findings": [
+                {
+                    "riskType": "ALLERGY_CONFLICT",
+                    "severity": "高",
+                    "explanation": "患者有明确的乳糖过敏史，而阿贝西利片辅料中含有乳糖，属于禁忌情况。",
+                    "evidenceSource": {
+                        "document": "阿贝西利片说明书",
+                        "section": "禁忌",
+                        "sourceText": "对阿贝西利活性成分或任何辅料过敏者禁用。"
+                    }
+                }
+            ],
+            "informationGaps": []
+        }
+    },
+    {
+        "input_data": {
+            "case_id": "阿贝西利片_DOSE_ADJUSTMENT_MISSED_01",
+            "patient_profile": {
+                "demographics": {
+                    "age": {
+                        "value": 71,
+                        "unit": "year"
+                    },
+                    "gender": "女",
+                    "weight": {
+                        "value": 55,
+                        "unit": "kg"
+                    },
+                    "pregnancy_status": "非妊娠",
+                    "lactation_status": "非哺乳期"
+                },
+                "clinical_status": {
+                    "current_diagnoses": [
+                        "HR阳性、HER2阴性转移性乳腺癌",
+                        "肝硬化失代偿期"
+                    ],
+                    "medical_history": [
+                        "乙型肝炎"
+                    ],
+                    "allergies": [],
+                    "organ_function": {
+                        "renal_impairment": "无",
+                        "hepatic_impairment": "重度"
+                    }
+                }
+            },
+            "prescription_orders": [
+                {
+                    "drug_name": "阿贝西利片",
+                    "dose_per_admin": {
+                        "value": 150,
+                        "unit": "mg"
+                    },
+                    "frequency": "每日两次",
+                    "route": "口服",
+                    "duration": {
+                        "value": 28,
+                        "unit": "天"
+                    }
+                }
+            ]
+        },
+        "golden_audit_report": {
+            "findings": [
+                {
+                    "riskType": "DOSE_ADJUSTMENT_MISSED",
+                    "severity": "高",
+                    "explanation": "患者为重度肝功能损伤（Child Pugh C），处方未根据说明书要求将给药频率调整为“每日一次”，仍使用标准频率“每日两次”，会显著增加药物暴露和毒性风险。",
+                    "evidenceSource": {
+                        "document": "阿贝西利片说明书",
+                        "section": "用法用量",
+                        "sourceText": "在重度(Child Pugh C)肝功能损伤患者中,建议降低给药频率至每日1次(参见【药代动力学】)。"
+                    }
+                }
+            ],
+            "informationGaps": []
+        }
+    },
+    {
+        "input_data": {
+            "case_id": "阿贝西利片_INTERACTION_DRUG_DRUG_01",
+            "patient_profile": {
+                "demographics": {
+                    "age": {
+                        "value": 66,
+                        "unit": "year"
+                    },
+                    "gender": "女",
+                    "weight": {
+                        "value": 62,
+                        "unit": "kg"
+                    },
+                    "pregnancy_status": "非妊娠",
+                    "lactation_status": "非哺乳期"
+                },
+                "clinical_status": {
+                    "current_diagnoses": [
+                        "HR阳性、HER2阴性转移性乳腺癌",
+                        "肺部真菌感染"
+                    ],
+                    "medical_history": [],
+                    "allergies": [],
+                    "organ_function": {
+                        "renal_impairment": "无",
+                        "hepatic_impairment": "无"
+                    }
+                }
+            },
+            "prescription_orders": [
+                {
+                    "drug_name": "阿贝西利片",
+                    "dose_per_admin": {
+                        "value": 150,
+                        "unit": "mg"
+                    },
+                    "frequency": "每日两次",
+                    "route": "口服",
+                    "duration": {
+                        "value": 28,
+                        "unit": "天"
+                    }
+                },
+                {
+                    "drug_name": "伊曲康唑胶囊",
+                    "dose_per_admin": {
+                        "value": 200,
+                        "unit": "mg"
+                    },
+                    "frequency": "每日一次",
+                    "route": "口服",
+                    "duration": {
+                        "value": 14,
+                        "unit": "天"
+                    }
+                }
+            ]
+        },
+        "golden_audit_report": {
+            "findings": [
+                {
+                    "riskType": "INTERACTION_DRUG_DRUG",
+                    "severity": "高",
+                    "explanation": "患者同时服用的伊曲康唑是强效CYP3A4抑制剂，会显著增加阿贝西利的血药浓度和毒性风险。在无法避免联用时，阿贝西利的剂量应降低至100mg每日两次，但当前处方未作调整。",
+                    "evidenceSource": {
+                        "document": "阿贝西利片说明书",
+                        "section": "用法用量",
+                        "sourceText": "如果不能避免使用强效 CYP3A4抑制剂,阿贝西利的剂量应降低至 100mg 每日2次。"
+                    }
+                }
+            ],
+            "informationGaps": []
+        }
+    },
+    {
+        "input_data": {
+            "case_id": "阿贝西利片_INTERACTION_DRUG_DRUG_02",
+            "patient_profile": {
+                "demographics": {
+                    "age": {
+                        "value": 59,
+                        "unit": "year"
+                    },
+                    "gender": "女",
+                    "weight": {
+                        "value": 64,
+                        "unit": "kg"
+                    },
+                    "pregnancy_status": "非妊娠",
+                    "lactation_status": "非哺乳期"
+                },
+                "clinical_status": {
+                    "current_diagnoses": [
+                        "HR阳性、HER2阴性转移性乳腺癌",
+                        "结核病"
+                    ],
+                    "medical_history": [],
+                    "allergies": [],
+                    "organ_function": {
+                        "renal_impairment": "无",
+                        "hepatic_impairment": "无"
+                    }
+                }
+            },
+            "prescription_orders": [
+                {
+                    "drug_name": "阿贝西利片",
+                    "dose_per_admin": {
+                        "value": 150,
+                        "unit": "mg"
+                    },
+                    "frequency": "每日两次",
+                    "route": "口服",
+                    "duration": {
+                        "value": 28,
+                        "unit": "天"
+                    }
+                },
+                {
+                    "drug_name": "利福平胶囊",
+                    "dose_per_admin": {
+                        "value": 600,
+                        "unit": "mg"
+                    },
+                    "frequency": "每日一次",
+                    "route": "口服",
+                    "duration": {
+                        "value": 180,
+                        "unit": "天"
+                    }
+                }
+            ]
+        },
+        "golden_audit_report": {
+            "findings": [
+                {
+                    "riskType": "INTERACTION_DRUG_DRUG",
+                    "severity": "高",
+                    "explanation": "患者同时服用的利福平是强效CYP3A4诱导剂，会显著降低阿贝西利的血药浓度，导致抗肿瘤治疗失败。说明书建议应避免联用。",
+                    "evidenceSource": {
+                        "document": "阿贝西利片说明书",
+                        "section": "药物相互作用",
+                        "sourceText": "由于存在阿贝西利有效性降低的风险,应避免合并使用强效 CYP3A4诱导剂(包括但不限于:卡马西平、苯妥英、利福平和圣约翰草)。"
+                    }
+                }
+            ],
+            "informationGaps": []
+        }
+    },
+    {
+        "input_data": {
+            "case_id": "阿贝西利片_ROUTE_ERROR_01",
+            "patient_profile": {
+                "demographics": {
+                    "age": {
+                        "value": 63,
+                        "unit": "year"
+                    },
+                    "gender": "女",
+                    "weight": {
+                        "value": 57,
+                        "unit": "kg"
+                    },
+                    "pregnancy_status": "非妊娠",
+                    "lactation_status": "非哺乳期"
+                },
+                "clinical_status": {
+                    "current_diagnoses": [
+                        "HR阳性、HER2阴性转移性乳腺癌"
+                    ],
+                    "medical_history": [
+                        "吞咽困难"
+                    ],
+                    "allergies": [],
+                    "organ_function": {
+                        "renal_impairment": "无",
+                        "hepatic_impairment": "无"
+                    }
+                }
+            },
+            "prescription_orders": [
+                {
+                    "drug_name": "阿贝西利片",
+                    "dose_per_admin": {
+                        "value": 150,
+                        "unit": "mg"
+                    },
+                    "frequency": "每日两次",
+                    "route": "静脉滴注",
+                    "duration": {
+                        "value": 5,
+                        "unit": "天"
+                    }
+                }
+            ]
+        },
+        "golden_audit_report": {
+            "findings": [
+                {
+                    "riskType": "ROUTE_ERROR",
+                    "severity": "高",
+                    "explanation": "阿贝西利片是口服剂型，处方中的给药途径“静脉滴注”是错误的，无法执行且极度危险。",
+                    "evidenceSource": {
+                        "document": "阿贝西利片说明书",
+                        "section": "用法用量",
+                        "sourceText": "阿贝西利为口服给药。"
+                    }
+                }
+            ],
+            "informationGaps": []
+        }
+    },
+    {
+        "input_data": {
+            "case_id": "阿贝西利片_CORRECT_CASE_01",
+            "patient_profile": {
+                "demographics": {
+                    "age": {
+                        "value": 68,
+                        "unit": "year"
+                    },
+                    "gender": "女",
+                    "weight": {
+                        "value": 66,
+                        "unit": "kg"
+                    },
+                    "pregnancy_status": "非妊娠",
+                    "lactation_status": "非哺乳期"
+                },
+                "clinical_status": {
+                    "current_diagnoses": [
+                        "HR阳性、HER2阴性局部晚期乳腺癌"
+                    ],
+                    "medical_history": [
+                        "高血压"
+                    ],
+                    "allergies": [
+                        "无"
+                    ],
+                    "organ_function": {
+                        "renal_impairment": "无",
+                        "hepatic_impairment": "无"
+                    }
+                }
+            },
+            "prescription_orders": [
+                {
+                    "drug_name": "阿贝西利片",
+                    "dose_per_admin": {
+                        "value": 150,
+                        "unit": "mg"
+                    },
+                    "frequency": "每日两次",
+                    "route": "口服",
+                    "duration": {
+                        "value": 28,
+                        "unit": "天"
+                    }
+                },
+                {
+                    "drug_name": "来曲唑片",
+                    "dose_per_admin": {
+                        "value": 2.5,
+                        "unit": "mg"
+                    },
+                    "frequency": "每日一次",
+                    "route": "口服",
+                    "duration": {
+                        "value": 28,
+                        "unit": "天"
+                    }
+                }
+            ]
+        },
+        "golden_audit_report": {
+            "findings": [],
+            "informationGaps": []
+        }
+    },
+    {
+        "input_data": {
+            "case_id": "阿贝西利片_CORRECT_CASE_02",
+            "patient_profile": {
+                "demographics": {
+                    "age": {
+                        "value": 61,
+                        "unit": "year"
+                    },
+                    "gender": "女",
+                    "weight": {
+                        "value": 59,
+                        "unit": "kg"
+                    },
+                    "pregnancy_status": "非妊娠",
+                    "lactation_status": "非哺乳期"
+                },
+                "clinical_status": {
+                    "current_diagnoses": [
+                        "HR阳性、HER2阴性转移性乳腺癌"
+                    ],
+                    "medical_history": [
+                        "既往有3级腹泻不良反应"
+                    ],
+                    "allergies": [],
+                    "organ_function": {
+                        "renal_impairment": "无",
+                        "hepatic_impairment": "无"
+                    }
+                }
+            },
+            "prescription_orders": [
+                {
+                    "drug_name": "阿贝西利片",
+                    "dose_per_admin": {
+                        "value": 100,
+                        "unit": "mg"
+                    },
+                    "frequency": "每日两次",
+                    "route": "口服",
+                    "duration": {
+                        "value": 28,
+                        "unit": "天"
+                    }
+                }
+            ]
+        },
+        "golden_audit_report": {
+            "findings": [],
+            "informationGaps": []
+        }
+    },
+    {
+        "input_data": {
+            "case_id": "阿贝西利片_KEY_INFO_MISSING_01",
+            "patient_profile": {
+                "demographics": {
+                    "age": {
+                        "value": 75,
+                        "unit": "year"
+                    },
+                    "gender": "女",
+                    "weight": {
+                        "value": 52,
+                        "unit": "kg"
+                    },
+                    "pregnancy_status": "非妊娠",
+                    "lactation_status": "非哺乳期"
+                },
+                "clinical_status": {
+                    "current_diagnoses": [
+                        "HR阳性、HER2阴性转移性乳腺癌"
+                    ],
+                    "medical_history": [
+                        "高血压",
+                        "2型糖尿病",
+                        "慢性肾病史"
+                    ],
+                    "allergies": [],
+                    "organ_function": {
+                        "renal_impairment": "未知",
+                        "hepatic_impairment": "无"
+                    }
+                }
+            },
+            "prescription_orders": [
+                {
+                    "drug_name": "阿贝西利片",
+                    "dose_per_admin": {
+                        "value": 150,
+                        "unit": "mg"
+                    },
+                    "frequency": "每日两次",
+                    "route": "口服",
+                    "duration": {
+                        "value": 28,
+                        "unit": "天"
+                    }
+                }
+            ]
+        },
+        "golden_audit_report": {
+            "findings": [],
+            "informationGaps": [
+                {
+                    "requiredInfo": "renal_impairment",
+                    "reason": "患者有慢性肾病史，肾功能状态未知。说明书提示在重度肾功能损伤患者中数据缺乏，应慎用并密切监测毒性。因此，需要明确患者当前的肾功能分级以完成全面的用药风险评估。"
+                }
+            ]
+        }
+    }
+]

@@ -1,0 +1,26 @@
+# configs/settings.yaml
+
+llm:
+  api_key: "${LLM_API_KEY}"
+  model_name: "gpt-4o"
+  base_url: "https://api.openai.com/v1"
+  timeout: 600
+
+mysql:
+  host: "${MYSQL_HOST:-localhost}"
+  port: ${MYSQL_PORT:-3306}
+  user: "${MYSQL_USER:-root}"
+  password: "${MYSQL_PASSWORD}"
+  database: "${MYSQL_DB:-med_kg}"
+
+neo4j:
+  uri: "${NEO4J_URI:-neo4j://localhost:7687}"
+  user: "${NEO4J_USER:-neo4j}"
+  password: "${NEO4J_PASSWORD}"
+
+paths:
+  prompt_dir: "./prompts"
+  input_dir: "./data/input_markdowns"
+
+logging:
+  level: "INFO"

@@ -1,0 +1,8 @@
+**任务**: 请从下列文本中提取结构化的禁忌和过敏规则。
+**药物规范名称**: {drug_canonical_name}
+**活性成份**: {active_ingredient_name}
+
+**待处理文本:**
+```
+{text_to_process}
+```

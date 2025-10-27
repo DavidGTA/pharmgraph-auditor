@@ -1,0 +1,15 @@
+{
+  "golden_audit_report": {
+    "findings": [
+      {
+        "riskType": "DOSAGE_OVER",
+        "severity": "高",
+        "explanation": "当前处方剂量为200mg每日2次，超过了推荐的150mg每日2次剂量，这可能导致药物过量风险。",
+        "evidenceSource": {
+          "sourceText": "阿贝西利与内分泌治疗联合使用时的推荐剂量为150mg每日2次。"
+        }
+      }
+    ],
+    "informationGaps": []
+  }
+}

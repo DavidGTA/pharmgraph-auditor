@@ -1,0 +1,104 @@
+[
+    {
+        "riskType": [
+            "INDICATION_MISMATCH"
+        ],
+        "description": "核实药物'阿贝西利片'是否适用于患者的诊断'HR阳性、HER2阴性转移性乳腺癌'。",
+        "params": {
+            "drug_name": "阿贝西利片",
+            "diagnoses": [
+                "HR阳性、HER2阴性转移性乳腺癌"
+            ]
+        }
+    },
+    {
+        "riskType": [
+            "DOSAGE_OVER",
+            "DOSAGE_UNDER",
+            "FREQUENCY_ERROR",
+            "ROUTE_ERROR"
+        ],
+        "description": "核实药物'阿贝西利片'的剂量(200 mg)、频次(每日两次)和途径(口服)是否符合针对诊断'HR阳性、HER2阴性转移性乳腺癌'的常规或指南推荐用法。",
+        "params": {
+            "drug_name": "阿贝西利片",
+            "dose_per_admin": {
+                "value": 200,
+                "unit": "mg"
+            },
+            "frequency": "每日两次",
+            "route": "口服",
+            "context": {
+                "diagnoses": [
+                    "HR阳性、HER2阴性转移性乳腺癌"
+                ]
+            }
+        }
+    },
+    {
+        "riskType": [
+            "CONTRAINDICATION_CONDITION"
+        ],
+        "description": "检查药物'阿贝西利片'是否与患者的生理状况(年龄, 性别, 妊娠/哺乳状态)和病理状况(既往病史, 肝肾功能)存在禁忌。",
+        "params": {
+            "drug_name": "阿贝西利片",
+            "patient_info": {
+                "age": {
+                    "value": 62,
+                    "unit": "year"
+                },
+                "gender": "女",
+                "pregnancy_status": "非妊娠",
+                "lactation_status": "非哺乳期",
+                "medical_history": [
+                    "高血压"
+                ],
+                "organ_function": {
+                    "renal_impairment": "无",
+                    "hepatic_impairment": "无"
+                }
+            }
+        }
+    },
+    {
+        "riskType": [
+            "ALLERGY_CONFLICT"
+        ],
+        "description": "检查药物'阿贝西利片'的成分或类别是否与患者的过敏史'无已知药物过敏史'冲突。",
+        "params": {
+            "drug_name": "阿贝西利片",
+            "allergies": [
+                "无已知药物过敏史"
+            ]
+        }
+    },
+    {
+        "riskType": [
+            "DOSE_ADJUSTMENT_MISSED"
+        ],
+        "description": "根据患者的肝肾功能、年龄等特殊情况，评估药物'阿贝西利片'的当前处方剂量(200 mg, 每日两次)是否需要进行调整。",
+        "params": {
+            "drug_name": "阿贝西利片",
+            "current_prescription": {
+                "dose_per_admin": {
+                    "value": 200,
+                    "unit": "mg"
+                },
+                "frequency": "每日两次"
+            },
+            "patient_info": {
+                "age": {
+                    "value": 62,
+                    "unit": "year"
+                },
+                "weight": {
+                    "value": 65,
+                    "unit": "kg"
+                },
+                "organ_function": {
+                    "renal_impairment": "无",
+                    "hepatic_impairment": "无"
+                }
+            }
+        }
+    }
+]

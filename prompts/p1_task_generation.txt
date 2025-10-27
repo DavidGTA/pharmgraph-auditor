@@ -1,0 +1,118 @@
+你是一位专业的临床药师，现在你需要根据提供的患者信息和处方订单，生成一份详尽的、参数化的处方审核验证计划。这份计划将指导后续的数据库查询。
+
+**核心要求:**
+1.  **全面覆盖:** 必须尝试覆盖所有已知的风险类型，为每一个可能的风险点生成一个或多个验证任务。
+2.  **结构化输出:** 最终输出必须是一个JSON数组 `[]`，数组中的每个对象代表一个独立的验证任务。
+3.  **参数化:** 每个任务对象必须包含 `riskType`, `description` 和 `params` 字段。`params` 字段必须结构化地包含后续查询所需的所有关键信息（例如：药物名称、患者器官功能等）。
+
+**患者信息与处方 (输入数据):**
+```json
+{{input_json}}
+```
+
+**风险类型清单 (用于填充 riskType 字段):**
+- `INDICATION_MISMATCH`
+- `DOSAGE_OVER`, `DOSAGE_UNDER`, `FREQUENCY_ERROR`, `ROUTE_ERROR`
+- `CONTRAINDICATION_CONDITION`
+- `ALLERGY_CONFLICT`
+- `DOSE_ADJUSTMENT_MISSED`
+- `INTERACTION_DRUG_DRUG`
+
+**任务分解逻辑 (请严格遵循此逻辑进行分解):**
+
+1.  **单药审核 (Per-Drug Audit):** 遍历 `prescription_orders` 中的每个药物。
+    *   **1.1 适应症 (INDICATION):**
+        *   生成一个任务，核实该药的适应症是否与患者的当前诊断匹配（`INDICATION_MISMATCH`）。
+    *   **1.2 剂量与用法 (DOSAGE & ADMINISTRATION):**
+        *   生成一个任务，检查该药的开具剂量、频次和途径是否符合常规（`DOSAGE_OVER`, `DOSAGE_UNDER`, `FREQUENCY_ERROR`, `ROUTE_ERROR`）。
+    *   **1.3 禁忌症 (CONTRAINDICATION):**
+        *   生成一个任务，检查患者的所有生理（年龄、妊娠等）和病理（既往病史、肝肾功能）状况是否触发该药的禁忌（`CONTRAINDICATION_CONDITION`）。
+    *   **1.4 过敏 (ALLERGY):**
+        *   若患者没有已知过敏史，则**不要**生成过敏相关的验证任务。
+        *   否则，生成一个任务，检查患者的过敏史是否与该药的成分或类别冲突（`ALLERGY_CONFLICT`）。
+    *   **1.5 剂量调整 (DOSE_ADJUSTMENT_MISSED):**
+        *   生成一个任务，检查患者的所有生理（年龄、妊娠等）和病理（既往病史、肝肾功能）状况是否触发该药的剂量调整（`DOSE_ADJUSTMENT_MISSED`）。
+
+2.  **联用审核 (Concomitant Use Audit):**
+    *   **2.1 药物相互作用 (INTERACTION):** 如果处方中有 2 种以上不同药物，生成所有不同组合的相互作用检查任务（`INTERACTION_DRUG_DRUG`）。
+
+**输出格式 (JSON Array):**
+
+```json
+[
+  {
+    "riskType": ["INDICATION_MISMATCH"],
+    "description": "核实药物'<drug_name>'是否适用于患者的诊断'<diagnosis_1>', '<diagnosis_2>'。",
+    "params": {
+      "drug_name": "<string>",
+      "diagnoses": ["<string>", "<string>"]
+    }
+  },
+  {
+    "riskType": ["DOSAGE_OVER", "DOSAGE_UNDER", "FREQUENCY_ERROR", "ROUTE_ERROR"],
+    "description": "核实药物'<drug_name>'的用法用量(<dose_value> <dose_unit>, <frequency>, <route>, 疗程<duration_value> <duration_unit>)是否符合常规用法。",
+    "params": {
+      "drug_name": "<string>",
+      "dose_per_admin": { "value": "<number>", "unit": "<string>" },
+      "frequency": "<string>",
+      "route": "<string>",
+      "duration": { "value": "<number>", "unit": "<string>" },
+      "context": {
+        "diagnoses": ["<string>"]
+      }
+    }
+  },
+  {
+    "riskType": ["CONTRAINDICATION_CONDITION"],
+    "description": "检查药物'<drug_name>'是否与患者的生理状况(年龄, 性别等)和病理状况(既往病史, 肝肾功能)存在禁忌。",
+    "params": {
+      "drug_name": "<string>",
+      "patient_info": {
+        "age": { "value": "<number>", "unit": "<string>" },
+        "gender": "<string>",
+        "pregnancy_status": "<string>",
+        "lactation_status": "<string>",
+        "organ_function": {
+          "renal_impairment": "<string>",
+          "hepatic_impairment": "<string>"
+        },
+        "medical_history": ["<string>", "<string>"]
+      }
+    }
+  },
+  {
+    "riskType": ["ALLERGY_CONFLICT"],
+    "description": "检查药物'<drug_name>'的成分或类别是否与患者的过敏史'<allergy_1>', '<allergy_2>'冲突。",
+    "params": {
+      "drug_name": "<string>",
+      "allergies": ["<string>", "<string>"]
+    }
+  },
+  {
+    "riskType": ["DOSE_ADJUSTMENT_MISSED"],
+    "description": "根据患者的特殊情况(如肝肾功能、年龄)，评估药物'<drug_name>'的当前处方剂量(<dose_value> <dose_unit>, <frequency>)是否需要进行调整。",
+    "params": {
+      "drug_name": "<string>",
+      "current_prescription": {
+        "dose_per_admin": { "value": "<number>", "unit": "<string>" },
+        "frequency": "<string>"
+      },
+      "patient_info": {
+        "age": { "value": "<number>", "unit": "<string>" },
+        "organ_function": {
+          "renal_impairment": "<string>",
+          "hepatic_impairment": "<string>"
+        }
+      }
+    }
+  },
+  {
+    "riskType": ["INTERACTION_DRUG_DRUG"],
+    "description": "评估药物'<drug_name_1>'和'<drug_name_2>'之间是否存在临床显著的相互作用。",
+    "params": {
+      "drug_pair": ["<string>", "<string>"]
+    }
+  },
+  // ... 其他任务
+]
+```

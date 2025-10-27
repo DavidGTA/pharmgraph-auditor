@@ -1,0 +1,92 @@
+# configs/extraction_tasks.yaml
+
+# 定义任务的执行顺序
+task_execution_order:
+  - extract_metadata
+  - extract_composition
+  - extract_indication
+  - extract_contraindication
+  - extract_dosage_rules
+  - extract_administration_texts
+  - extract_special_populations
+  - extract_drug_interactions
+
+# 定义每个任务的具体细节
+tasks:
+  extract_metadata:
+    task_id: "【药品名称】"
+    input_sections: ["【药品名称】"]
+    prompts:
+      system: "drug_info.txt"
+      user: "drug_info.txt"
+    output_model: "DrugMetadata"
+    provides_context: 
+      drug_canonical_name: "canonical_name"
+
+  extract_composition:
+    task_id: "【成份】"
+    input_sections: ["【成份】"]
+    prompts:
+      system: "description.txt"
+      user: "description.txt"
+    output_model: "DescriptionPayload"
+    requires_context: ["drug_canonical_name"]
+    provides_context:
+      active_ingredient_name: "__custom_logic__"
+
+  extract_indication:
+    task_id: "【适应症】"
+    input_sections: ["【适应症】"]
+    prompts:
+      system: "indication.txt"
+      user: "indication.txt"
+    output_model: "IndicationPayload"
+    requires_context: ["drug_canonical_name"]
+  
+  extract_contraindication:
+    task_id: "【禁忌】"
+    input_sections: ["【禁忌】", "【警告】"]
+    prompts:
+      system: "contraindication.txt"
+      user: "contraindication.txt"
+    output_model: "ContraindicationPayload"
+    requires_context: ["drug_canonical_name", "active_ingredient_name"]
+
+  extract_dosage_rules:
+    task_id: "【用法用量】-Dosage"
+    input_sections: ["【用法用量】"]
+    prompts:
+      system: "dosage.txt"
+      user: "dosage_admin.txt"
+    output_model: "DosagePayload"
+    requires_context: ["drug_canonical_name"]
+
+  extract_administration_texts:
+    task_id: "【用法用量】-Administration"
+    input_sections: ["【用法用量】"]
+    prompts:
+      system: "administration.txt"
+      user: "dosage_admin.txt"
+    output_model: "AdministrationPayload"
+    requires_context: ["drug_canonical_name"]
+
+  extract_special_populations:
+    task_id: "【特殊人群用药】"
+    input_sections: 
+      - "【孕妇及哺乳期妇女用药】"
+      - "【儿童用药】"
+      - "【老年用药】"
+    prompts:
+      system: "special_populations.txt"
+      user: "special_populations.txt"
+    output_model: "SpecialPopulationsPayload"
+    requires_context: ["drug_canonical_name"]
+
+  extract_drug_interactions:
+    task_id: "【药物相互作用】"
+    input_sections: ["【药物相互作用】"]
+    prompts:
+      system: "drug_interaction.txt"
+      user: "drug_interaction.txt"
+    output_model: "InteractionPayload"
+    requires_context: ["drug_canonical_name"]
